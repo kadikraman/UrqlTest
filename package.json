@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.9.0",
     "@react-native-community/masked-view": "^0.1.8",
     "@react-navigation/native": "^5.1.5",
     "@react-navigation/stack": "^5.2.10",
@@ -20,7 +21,9 @@
     "react-native-reanimated": "^1.8.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.4.0",
-    "urql": "^1.9.6"
+    "react-native-sensitive-info": "^5.5.5",
+    "urql": "^1.9.6",
+    "wonka": "^4.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
