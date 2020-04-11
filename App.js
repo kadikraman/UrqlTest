@@ -1,4 +1,5 @@
 import React from 'react';
+import { createClient, Provider } from 'urql';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,14 +8,20 @@ import ArtDetailScreen from './screens/ArtDetailScreen';
 
 const Stack = createStackNavigator();
 
+const client = createClient({
+  url: 'https://metaphysics-production.artsy.net/',
+});
+
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="ArtDetail" component={ArtDetailScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider value={client}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="ArtDetail" component={ArtDetailScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 
