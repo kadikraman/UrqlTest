@@ -8,6 +8,7 @@ import {
   cacheExchange,
   fetchExchange,
 } from 'urql';
+import { devtoolsExchange } from '@urql/devtools';
 import { pipe, mergeMap, fromPromise, map } from 'wonka';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -22,7 +23,7 @@ const authExchange = ({ forward }) => {
       ops$,
       map(async operation => {
         // 1 Async Storage - errors
-        const token = await AsyncStorage.getItem('test');
+        // const token = await AsyncStorage.getItem('test');
 
         // 2 Sensitive Storage - errors
         // const token = await SInfo.getItem('test', {});
@@ -36,7 +37,7 @@ const authExchange = ({ forward }) => {
             ...operation.context,
             fetchOptions: {
               ...operation.context.fetchOptions,
-              headers: { Authorization: token || '' },
+              headers: { Authorization: '' },
             },
           },
         };
@@ -49,8 +50,16 @@ const authExchange = ({ forward }) => {
 
 const client = createClient({
   url: 'https://metaphysics-production.artsy.net/',
-  exchanges: [dedupExchange, cacheExchange, authExchange, fetchExchange],
+  exchanges: [
+    devtoolsExchange,
+    dedupExchange,
+    cacheExchange,
+    authExchange,
+    fetchExchange,
+  ],
 });
+
+console.log('HELLO FROM APP');
 
 const App = () => {
   return (
