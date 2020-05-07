@@ -11,6 +11,7 @@ import {
 import { pipe, mergeMap, fromPromise, map } from 'wonka';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { devtoolsExchange } from '@urql/devtools';
 import HomeScreen from './screens/HomeScreen';
 import ArtDetailScreen from './screens/ArtDetailScreen';
 
@@ -49,7 +50,7 @@ const authExchange = ({ forward }) => {
 
 const client = createClient({
   url: 'https://metaphysics-production.artsy.net/',
-  exchanges: [dedupExchange, cacheExchange, authExchange, fetchExchange],
+  exchanges: [devtoolsExchange, dedupExchange, cacheExchange, authExchange, fetchExchange],
 });
 
 const App = () => {
