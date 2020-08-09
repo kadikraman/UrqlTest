@@ -22,10 +22,10 @@ const authExchange = ({ forward }) => {
     return pipe(
       ops$,
       map(async operation => {
-        // 1 Async Storage - errors
+        // 1 Async Storage - warnings
         // const token = await AsyncStorage.getItem('test');
 
-        // 2 Sensitive Storage - errors
+        // 2 Sensitive Storage - warnings
         // const token = await SInfo.getItem('test', {});
 
         // 3. Promise.resolve - does not error
@@ -58,8 +58,6 @@ const client = createClient({
     fetchExchange,
   ],
 });
-
-console.log('HELLO FROM APP');
 
 const App = () => {
   return (
