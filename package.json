@@ -23,6 +23,7 @@
     "react-native-reanimated": "^1.8.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.4.0",
+    "react-native-splash-screen": "^3.2.0",
     "urql": "^1.9.7",
     "wonka": "^4.0.9"
   },
