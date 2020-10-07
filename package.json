@@ -14,7 +14,7 @@
     "@react-navigation/native": "^5.1.5",
     "@react-navigation/stack": "^5.2.10",
     "@urql/core": "^1.11.7",
-    "@urql/devtools": "2.0.1",
+    "@urql/devtools": "^2.0.1",
     "graphql": "^15.0.0",
     "react": "16.13.1",
     "react-native": "0.63.3",
