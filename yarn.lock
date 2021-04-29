@@ -1552,10 +1552,10 @@
   dependencies:
     wonka "^4.0.10"
 
-"@urql/devtools@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@urql/devtools/-/devtools-2.0.1.tgz#9c06eae099a76fd5f2467ce59edeef8c7fa1e94a"
-  integrity sha512-1aFFz4iz0rnY10SefM7Nym6cVqyUm4bZ6JvSkoikw17YJVBcqrdcUj+fc4FcAt/aICErM6fv9lsuZ7o6H1PeoQ==
+"@urql/devtools@^2.0.1":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@urql/devtools/-/devtools-2.0.3.tgz#780998c37386c72af9402a8f88c1b388e62f28cd"
+  integrity sha512-TktPLiBS9LcBPHD6qcnb8wqOVcg3Bx0iCtvQ80uPpfofwwBGJmqnQTjUdEFU6kwaLOFZULQ9+Uo4831G823mQw==
   dependencies:
     wonka ">= 4.0.9"
 
