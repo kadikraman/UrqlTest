@@ -40,7 +40,7 @@ const HomeScreen = ({ navigation }) => {
     <FlatList
       style={styles.list}
       data={data.artworks}
-      keyExtractor={item => item.id}
+      keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <TouchableOpacity
           style={styles.touchable}

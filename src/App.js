@@ -1,19 +1,14 @@
 import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
-import { createClient, Provider, defaultExchanges } from 'urql';
-import { devtoolsExchange } from '@urql/devtools';
+import { Provider } from 'urql';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
 import ArtDetailScreen from './screens/ArtDetailScreen';
 import SplashScreen from 'react-native-splash-screen';
+import { client } from './graphql/client';
 
 const Stack = createStackNavigator();
-
-const client = createClient({
-  url: 'https://metaphysics-production.artsy.net/',
-  exchanges: [devtoolsExchange, ...defaultExchanges],
-});
 
 const App = () => {
   useEffect(() => {
