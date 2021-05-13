@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <FlatList
       style={styles.list}
-      data={data.artworks}
+      data={(data || {}).artworks}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <TouchableOpacity
