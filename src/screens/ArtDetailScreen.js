@@ -6,10 +6,12 @@ import { useQuery } from 'urql';
 const ArtQuery = `
   query getArtwork($id: String!) {
     artwork(id: $id) {
+      id
       image {
-        image_url
+        imageURL
       }
       artist {
+        id
         name
       }
     }
@@ -23,6 +25,7 @@ const ArtDetailScreen = ({ route }) => {
   });
 
   const { data, fetching, error } = result;
+
   if (fetching) {
     return <Text>Loading...</Text>;
   }
@@ -36,7 +39,7 @@ const ArtDetailScreen = ({ route }) => {
         <Image
           style={styles.image}
           source={{
-            uri: data.artwork.image.image_url.replace(':version', 'large'),
+            uri: data.artwork.image.imageURL.replace(':version', 'large'),
           }}
         />
       </FadeIn>

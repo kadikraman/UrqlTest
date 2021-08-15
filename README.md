@@ -13,7 +13,7 @@ It uses:
 
 This is a plain React Native app, meaning that in order to run it, you'll need to have XCode (for iOS) or Android Studio (for Android) set up.
 
-First, clone the repo and install the JavaSctipt dependencies with
+First, clone the repo and install the JavaScript dependencies with
 
 ```sh
 yarn

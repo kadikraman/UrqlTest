@@ -12,12 +12,17 @@ import { useQuery } from 'urql';
 const ArtQuery = `
   query getArtworks {
     artworks {
-      id
-      image {
-        image_url
-      }
-      artist {
-        name
+      edges {
+        node {
+          id
+          image {
+            imageURL
+          }
+          artist {
+            id
+            name
+          }
+        }
       }
     }
   }
@@ -29,6 +34,7 @@ const HomeScreen = ({ navigation }) => {
   });
 
   const { data, fetching, error } = result;
+
   if (fetching) {
     return <Text>Loading...</Text>;
   }
@@ -39,21 +45,23 @@ const HomeScreen = ({ navigation }) => {
   return (
     <FlatList
       style={styles.list}
-      data={(data || {}).artworks}
-      keyExtractor={(item) => item.id}
+      data={data && data.artworks ? data.artworks.edges : []}
+      keyExtractor={(item) => item.node.id}
       renderItem={({ item }) => (
         <TouchableOpacity
           style={styles.touchable}
-          onPress={() => navigation.navigate('ArtDetail', { id: item.id })}>
+          onPress={() =>
+            navigation.navigate('ArtDetail', { id: item.node.id })
+          }>
           <FadeIn>
             <Image
               style={styles.image}
               source={{
-                uri: item.image.image_url.replace(':version', 'medium'),
+                uri: item.node.image.imageURL.replace(':version', 'medium'),
               }}
             />
           </FadeIn>
-          <Text>By {item.artist.name}</Text>
+          <Text>By {item.node.artist.name}</Text>
         </TouchableOpacity>
       )}
     />

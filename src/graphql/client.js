@@ -55,6 +55,6 @@ const cache = offlineExchange({
 });
 
 export const client = createClient({
-  url: 'https://metaphysics-production.artsy.net/',
+  url: 'https://metaphysics-production.artsy.net/v2',
   exchanges: [devtoolsExchange, dedupExchange, cache, fetchExchange],
 });
