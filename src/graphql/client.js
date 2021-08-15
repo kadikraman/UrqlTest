@@ -7,12 +7,11 @@ const cacheConfig = {
   schema,
   keys: {
     Image: (image) => image.href,
+    Artwork: (artwork) => artwork.slug,
   },
   resolvers: {
     Query: {
-      artwork: (_, args, cache) => {
-        return { __typename: 'Artwork', id: args.id };
-      },
+      artwork: (_, args) => ({ __typename: 'Artwork', slug: args.id }),
     },
   },
   updates: {

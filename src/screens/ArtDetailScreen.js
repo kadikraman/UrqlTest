@@ -4,9 +4,8 @@ import FadeIn from 'react-native-fade-in-image';
 import { useQuery, gql } from 'urql';
 
 const ArtQuery = gql`
-  query getArtwork($id: String!) {
-    artwork(id: $id) {
-      id
+  query getArtwork($slug: String!) {
+    artwork(id: $slug) {
       slug
       image {
         imageURL
@@ -15,6 +14,7 @@ const ArtQuery = gql`
         id
         name
         bio
+        location
       }
     }
   }
@@ -23,7 +23,7 @@ const ArtQuery = gql`
 const ArtDetailScreen = ({ route }) => {
   const [result] = useQuery({
     query: ArtQuery,
-    variables: { id: route.params.id, slug: route.params.slug },
+    variables: { slug: route.params.slug },
   });
 
   const { data, fetching, error } = result;
@@ -32,8 +32,12 @@ const ArtDetailScreen = ({ route }) => {
     return <Text>Loading...</Text>;
   }
 
-  if (error && !result.data) {
+  if (error && (!data || !data.artwork)) {
     return <Text>Oh no... {error.message}</Text>;
+  }
+
+  if (!data || !data.artwork) {
+    return <Text>No data</Text>;
   }
 
   return (
@@ -47,6 +51,7 @@ const ArtDetailScreen = ({ route }) => {
         />
       </FadeIn>
       <Text>By {data.artwork.artist.name}</Text>
+      <Text style={styles.bio}>{data.artwork.artist.location}</Text>
       <Text style={styles.bio}>{data.artwork.artist.bio}</Text>
     </View>
   );

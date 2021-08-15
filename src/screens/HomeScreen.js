@@ -15,7 +15,6 @@ const ArtQuery = gql`
       id
       edges {
         node {
-          id
           slug
           image {
             imageURL
@@ -50,13 +49,12 @@ const HomeScreen = ({ navigation }) => {
       data={
         data && data.artworksConnection ? data.artworksConnection.edges : []
       }
-      keyExtractor={(item) => item.node.id}
+      keyExtractor={(item) => item.node.slug}
       renderItem={({ item }) => (
         <TouchableOpacity
           style={styles.touchable}
           onPress={() =>
             navigation.navigate('ArtDetail', {
-              id: item.node.id,
               slug: item.node.slug,
             })
           }>
