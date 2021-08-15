@@ -7,14 +7,16 @@ import {
   StyleSheet,
 } from 'react-native';
 import FadeIn from 'react-native-fade-in-image';
-import { useQuery } from 'urql';
+import { useQuery, gql } from 'urql';
 
-const ArtQuery = `
+const ArtQuery = gql`
   query getArtworks {
-    artworks {
+    artworksConnection(first: 10) {
+      id
       edges {
         node {
           id
+          slug
           image {
             imageURL
           }
@@ -45,13 +47,18 @@ const HomeScreen = ({ navigation }) => {
   return (
     <FlatList
       style={styles.list}
-      data={data && data.artworks ? data.artworks.edges : []}
+      data={
+        data && data.artworksConnection ? data.artworksConnection.edges : []
+      }
       keyExtractor={(item) => item.node.id}
       renderItem={({ item }) => (
         <TouchableOpacity
           style={styles.touchable}
           onPress={() =>
-            navigation.navigate('ArtDetail', { id: item.node.id })
+            navigation.navigate('ArtDetail', {
+              id: item.node.id,
+              slug: item.node.slug,
+            })
           }>
           <FadeIn>
             <Image

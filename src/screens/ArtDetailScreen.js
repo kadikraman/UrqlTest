@@ -1,18 +1,20 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import FadeIn from 'react-native-fade-in-image';
-import { useQuery } from 'urql';
+import { useQuery, gql } from 'urql';
 
-const ArtQuery = `
+const ArtQuery = gql`
   query getArtwork($id: String!) {
     artwork(id: $id) {
       id
+      slug
       image {
         imageURL
       }
       artist {
         id
         name
+        bio
       }
     }
   }
@@ -21,7 +23,7 @@ const ArtQuery = `
 const ArtDetailScreen = ({ route }) => {
   const [result] = useQuery({
     query: ArtQuery,
-    variables: { id: route.params.id },
+    variables: { id: route.params.id, slug: route.params.slug },
   });
 
   const { data, fetching, error } = result;
@@ -29,7 +31,8 @@ const ArtDetailScreen = ({ route }) => {
   if (fetching) {
     return <Text>Loading...</Text>;
   }
-  if (error) {
+
+  if (error && !result.data) {
     return <Text>Oh no... {error.message}</Text>;
   }
 
@@ -44,6 +47,7 @@ const ArtDetailScreen = ({ route }) => {
         />
       </FadeIn>
       <Text>By {data.artwork.artist.name}</Text>
+      <Text style={styles.bio}>{data.artwork.artist.bio}</Text>
     </View>
   );
 };
@@ -55,6 +59,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   image: { height: 300, width: 300, margin: 20 },
+  bio: {
+    margin: 20,
+    fontSize: 18,
+  },
 });
 
 export default ArtDetailScreen;
